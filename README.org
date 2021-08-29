@@ -34,8 +34,9 @@ list:
 #+end_comment
 #+begin_src shell
 # See:
-# https://tug.org/pipermail/luatex/2021-August/007584.html
-# https://tug.org/pipermail/luatex/2021-August/007585.html
+# https://tug.org/pipermail/luatex/2021-August/007584.html my first e-mail
+# https://tug.org/pipermail/luatex/2021-August/007585.html vitek's answer
+# https://tug.org/pipermail/luatex/2021-August/007587.html first prototype
 
 # Test:
 rm -Rv    ~/usrc/markdown-dednat6/
@@ -45,13 +46,13 @@ git clone https://github.com/edrx/markdown-dednat6/
 cd        ~/usrc/markdown-dednat6/
 
 lualatex test.tex
+xpdf -fullscreen test.pdf
 # See: https://github.com/edrx/markdown-dednat6/blob/main/test.tex
-# Expected output:
+# Expected output on stdout:
 #
-# 39:   "Plop"
-# 40:   " Plip"
-# 41:   "   "
-# 42:   "  Bletch"
+# 53:   "Plop"
+# 54:   " Plip"
+# 55:   "  Bletch"
 #+end_src
 
 

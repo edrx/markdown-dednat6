@@ -15,6 +15,16 @@
 \directlua{texfile0(status.filename)}
 \def\pu{\directlua{pu()}}
 
+%L skiplinesuntil_ = 0
+%L skiplinesuntil  = function (li)
+%L     if tex.inputlineno <= skiplinesuntil_ then
+%L       return "%"
+%L     end
+%L     return li
+%L   end
+%L luatexbase.add_to_callback("process_input_buffer",
+%L    skiplinesuntil, "skiplinesuntil")
+%L 
 %L findlinewithre = function (firstline, re)
 %L     for i=firstline,1000000 do
 %L       if texlines[i] == nil then error("re not found") end
@@ -26,21 +36,43 @@
 %L     for k=i,j do print(k..":", '"'..texlines[k]..'"') end
 %L     print("\n\n")
 %L   end
-%L Foo = function (re)
-%L     local thisline  = tex.inputlineno
-%L     local firstline = thisline + 1
-%L     local endline   = findlinewithre(firstline, re)
-%L     local lastline  = endline - 1
-%L     printlines(firstline, lastline)
+%L Foo = function (re, skip)
+%L     local outerbeg = tex.inputlineno
+%L     local innerbeg = outerbeg + 1
+%L     local innerend = findlinewithre(innerbeg, re) - 1
+%L     local outerend = innerend + 1
+%L     printlines(innerbeg, innerend)
+%L     if skip then skiplinesuntil_ = outerend end
 %L   end
+%L
+
 \pu
 
-\directlua{Foo("End of block")}
+(Test 1)
+\directlua{Foo("End of block")}%
 Plop
  Plip
-   
   Bletch
 End of block
+(without skip, with \%)
+
+
+(Test 2)
+\directlua{Foo("End of block", "skip")}%
+Plop
+ Plip
+  Bletch
+End of block
+(with skip, with \%)
+
+
+(Test 3)
+\directlua{Foo("End of block", "skip")}
+Plop
+ Plip
+  Bletch
+End of block
+(with skip, without \%)
 
 
 \end{document}
@@ -53,6 +85,7 @@ End of block
  (eepitch-kill)
  (eepitch-shell)
 lualatex test.tex
+xpdf -fullscreen test.pdf
 
 
 
