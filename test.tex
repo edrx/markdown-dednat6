@@ -1,0 +1,58 @@
+% This file:
+%   http://angg.twu.net/markdown-dednat6/
+%   http://angg.twu.net/markdown-dednat6/test.tex.html
+%   http://angg.twu.net/markdown-dednat6/test.tex
+%           (find-angg "markdown-dednat6/test.tex")
+% Author: Eduardo Ochs <eduardoochs@gmail.com>
+%
+% (defun te () (interactive) (find-angg "markdown-dednat6/test.tex"))
+
+\documentclass{article}
+\begin{document}
+
+\catcode`\^^J=10
+\directlua{dofile "minimalcore.lua"} % (find-angg "markdown-dednat6/minimalcore.lua")
+\directlua{texfile0(status.filename)}
+\def\pu{\directlua{pu()}}
+
+%L findlinewithre = function (firstline, re)
+%L     for i=firstline,1000000 do
+%L       if texlines[i] == nil then error("re not found") end
+%L       if texlines[i]:match(re) then return i end
+%L     end
+%L   end
+%L printlines = function (i, j)
+%L     print("\n\n")
+%L     for k=i,j do print(k..":", '"'..texlines[k]..'"') end
+%L     print("\n\n")
+%L   end
+%L Foo = function (re)
+%L     local thisline  = tex.inputlineno
+%L     local firstline = thisline + 1
+%L     local endline   = findlinewithre(firstline, re)
+%L     local lastline  = endline - 1
+%L     printlines(firstline, lastline)
+%L   end
+\pu
+
+\directlua{Foo("End of block")}
+Plop
+ Plip
+   
+  Bletch
+End of block
+
+
+\end{document}
+
+% LaTeX stops at the "\end{document}" above
+% and ignores this.
+% Test:
+
+ (eepitch-shell)
+ (eepitch-kill)
+ (eepitch-shell)
+lualatex test.tex
+
+
+

@@ -41,11 +41,11 @@ list:
 rm -Rv    ~/usrc/markdown-dednat6/
 mkdir  -p ~/usrc/
 cd        ~/usrc/
-# git clone https://github.com/edrx/markdown-dednat6/
-cp -av ~/markdown-dednat6/ .
+git clone https://github.com/edrx/markdown-dednat6/
 cd        ~/usrc/markdown-dednat6/
-lualatex test.tex
 
+lualatex test.tex
+# See: https://github.com/edrx/markdown-dednat6/blob/main/test.tex
 # Expected output:
 #
 # 39:   "Plop"
@@ -63,6 +63,9 @@ lualatex test.tex
 cd ~/markdown-dednat6/
 laf
 rm -v *~
+rm -v *.log
+rm -v *.pdf
+rm -v *.aux
 rm -v *.html
 
 # (find-fline   "~/markdown-dednat6/")
