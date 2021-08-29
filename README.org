@@ -1,0 +1,83 @@
+# This file:
+#   https://github.com/edrx/markdown-dednat6/
+#       http://angg.twu.net/markdown-dednat6/README.org.html
+#       http://angg.twu.net/markdown-dednat6/README.org
+#               (find-angg "markdown-dednat6/README.org")
+#               (find-angg "markdown-dednat6/")
+# Author: Eduardo Ochs <eduardoochs@gmail.com>
+# 
+# Some eev-isms:
+# (defun c  () (interactive) (eek "C-c C-e h h"))
+# (defun o  () (interactive) (find-angg "markdown-dednat6/README.org"))
+# (defun v  () (interactive) (brg     "~/markdown-dednat6/README.html"))
+# (defun cv () (interactive) (c) (v))
+# (defun l  () (interactive) (find-angg "markdown-dednat6/minimalcore.lua"))
+# (defun te () (interactive) (find-angg "markdown-dednat6/test.tex"))
+# (defun ss () (interactive) (eek "C-c C-, s shell"))
+# 
+# (find-mygitrepo-links "markdown-dednat6")
+# (find-orgnode "Table of Contents")
+#+OPTIONS: toc:nil num:nil
+
+This is an attempt to use the "minimalcore.lua" file of dednat6 to
+implement a certain feature on Vitek Novotny's package for markdown on
+LaTeX.
+
+See these posts on the luatex mailing
+list:
+
+
+#+begin_comment
+ (eepitch-shell)
+ (eepitch-kill)
+ (eepitch-shell)
+#+end_comment
+#+begin_src shell
+# See:
+# https://tug.org/pipermail/luatex/2021-August/007584.html
+# https://tug.org/pipermail/luatex/2021-August/007585.html
+
+# Test:
+rm -Rv    ~/usrc/markdown-dednat6/
+mkdir  -p ~/usrc/
+cd        ~/usrc/
+# git clone https://github.com/edrx/markdown-dednat6/
+cp -av ~/markdown-dednat6/ .
+cd        ~/usrc/markdown-dednat6/
+lualatex test.tex
+
+# Expected output:
+#
+# 39:   "Plop"
+# 40:   " Plip"
+# 41:   "   "
+# 42:   "  Bletch"
+#+end_src
+
+
+
+#+begin_comment
+ (eepitch-shell)
+ (eepitch-kill)
+ (eepitch-shell)
+cd ~/markdown-dednat6/
+laf
+rm -v *~
+rm -v *.html
+
+# (find-fline   "~/markdown-dednat6/")
+# (magit-status "~/markdown-dednat6/")
+# (find-gitk    "~/markdown-dednat6/")
+#
+#   (s)tage all changes
+#   (c)ommit -> (c)reate
+#   (P)ush -> (p)ushremote
+#   https://github.com/edrx/markdown-dednat6
+#
+#+end_comment
+
+# Local Variables:
+# coding:               utf-8-unix
+# modes:                (org-mode fundamental-mode)
+# org-html-postamble:   nil
+# End:
